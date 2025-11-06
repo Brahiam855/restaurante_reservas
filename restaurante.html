@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arquitectura de Reservas</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.259.0/dist/lucide.min.js"></script>
+<style>
+  .component-card:hover {
+    transform: scale(1.02);
+  }
+</style>
+</head>
+<body class="bg-slate-900 text-white">
+
+<div class="w-full min-h-screen p-8">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h1 class="text-5xl font-bold text-white mb-4">Arquitectura en Capas</h1>
+      <h2 class="text-2xl text-blue-400 mb-2">Sistema de Reservas de Restaurante</h2>
+      <p class="text-slate-300 text-lg">Aplicando Single Responsibility Principle (SRP)</p>
+    </div>
+
+    <div class="space-y-6 mb-12">
+      <!-- Presentation Layer -->
+      <div class="layer-card bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl p-6 shadow-2xl cursor-pointer border-2 border-transparent" onclick="toggleLayer(this)">
+        <h3 class="text-2xl font-bold text-white mb-4 text-center">CAPA DE PRESENTACIÓN</h3>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="component-card bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-4 transition-all">
+            <div class="flex items-center gap-3 mb-3">
+              <i data-lucide="smartphone" class="w-6 h-6 text-white"></i>
+              <h4 class="font-bold text-white text-sm">Interfaz Web/Móvil</h4>
+            </div>
+            <ul class="responsibilities text-xs text-slate-200 hidden">
+              <li>• Mostrar formulario de reserva</li>
+              <li>• Calendario de disponibilidad</li>
+              <li>• Confirmar/cancelar reservas</li>
+              <li>• Ver historial de reservas</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-center">
+        <div class="text-slate-400 text-4xl">↓</div>
+      </div>
+
+      <!-- Business Layer -->
+      <div class="layer-card bg-gradient-to-r from-green-600 to-green-800 rounded-xl p-6 shadow-2xl cursor-pointer border-2 border-transparent" onclick="toggleLayer(this)">
+        <h3 class="text-2xl font-bold text-white mb-4 text-center">CAPA DE LÓGICA DE NEGOCIO</h3>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="component-card bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-4 transition-all">
+            <div class="flex items-center gap-3 mb-3">
+              <i data-lucide="calendar" class="w-6 h-6 text-white"></i>
+              <h4 class="font-bold text-white text-sm">Gestor de Reservas</h4>
+            </div>
+            <ul class="responsibilities text-xs text-slate-200 hidden">
+              <li>• Crear nueva reserva</li>
+              <li>• Modificar reserva existente</li>
+              <li>• Cancelar reserva</li>
+              <li>• Validar datos de reserva</li>
+            </ul>
+          </div>
+          <div class="component-card bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-4 transition-all">
+            <div class="flex items-center gap-3 mb-3">
+              <i data-lucide="clock" class="w-6 h-6 text-white"></i>
+              <h4 class="font-bold text-white text-sm">Gestor de Disponibilidad</h4>
+            </div>
+            <ul class="responsibilities text-xs text-slate-200 hidden">
+              <li>• Consultar mesas disponibles</li>
+              <li>• Verificar horarios disponibles</li>
+              <li>• Bloquear/liberar mesas</li>
+              <li>• Calcular capacidad</li>
+            </ul>
+          </div>
+          <div class="component-card bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-4 transition-all">
+            <div class="flex items-center gap-3 mb-3">
+              <i data-lucide="users" class="w-6 h-6 text-white"></i>
+              <h4 class="font-bold text-white text-sm">Gestor de Usuarios</h4>
+            </div>
+            <ul class="responsibilities text-xs text-slate-200 hidden">
+              <li>• Registrar cliente</li>
+              <li>• Autenticar usuario</li>
+              <li>• Actualizar perfil</li>
+              <li>• Gestionar historial</li>
+            </ul>
+          </div>
+          <div class="component-card bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-4 transition-all">
+            <div class="flex items-center gap-3 mb-3">
+              <i data-lucide="mail" class="w-6 h-6 text-white"></i>
+              <h4 class="font-bold text-white text-sm">Gestor de Notificaciones</h4>
+            </div>
+            <ul class="responsibilities text-xs text-slate-200 hidden">
+              <li>• Enviar email confirmación</li>
+              <li>• Enviar SMS recordatorio</li>
+              <li>• Notificar cancelaciones</li>
+              <li>• Alertas al restaurante</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-center">
+        <div class="text-slate-400 text-4xl">↓</div>
+      </div>
+
+      <!-- Data Layer -->
+      <div class="layer-card bg-gradient-to-r from-purple-600 to-purple-800 rounded-xl p-6 shadow-2xl cursor-pointer border-2 border-transparent" onclick="toggleLayer(this)">
+        <h3 class="text-2xl font-bold text-white mb-4 text-center">CAPA DE DATOS</h3>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="component-card bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-4 transition-all">
+            <div class="flex items-center gap-3 mb-3">
+              <i data-lucide="database" class="w-6 h-6 text-white"></i>
+              <h4 class="font-bold text-white text-sm">Base de Datos</h4>
+            </div>
+            <ul class="responsibilities text-xs text-slate-200 hidden">
+              <li>• Tabla: Usuarios (id, nombre, email, teléfono)</li>
+              <li>• Tabla: Reservas (id, usuario, fecha, hora, personas)</li>
+              <li>• Tabla: Mesas (id, capacidad, estado)</li>
+              <li>• Tabla: Horarios (id, día, hora_inicio, hora_fin)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-center items-center gap-4">
+        <div class="text-slate-400 text-2xl">←→</div>
+        <div class="text-slate-300 text-sm">Conexiones externas</div>
+      </div>
+
+      <!-- External Layer -->
+      <div class="layer-card bg-gradient-to-r from-orange-600 to-orange-800 rounded-xl p-6 shadow-2xl cursor-pointer border-2 border-transparent" onclick="toggleLayer(this)">
+        <h3 class="text-2xl font-bold text-white mb-4 text-center">SERVICIOS EXTERNOS</h3>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="component-card bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-4 transition-all">
+            <div class="flex items-center gap-3 mb-3">
+              <i data-lucide="credit-card" class="w-6 h-6 text-white"></i>
+              <h4 class="font-bold text-white text-sm">APIs Externas</h4>
+            </div>
+            <ul class="responsibilities text-xs text-slate-200 hidden">
+              <li>• Servicio de Email (Gmail API, SendGrid)</li>
+              <li>• Servicio de SMS (Twilio)</li>
+              <li>• Pasarela de Pago (Stripe, PayPal)</li>
+              <li>• Servicio de Mapas (Google Maps)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- SRP Section -->
+      <div class="bg-gradient-to-r from-indigo-900 to-purple-900 rounded-xl p-8 shadow-2xl border border-indigo-700 mt-12">
+        <div class="flex items-start gap-4">
+          <i data-lucide="check-circle" class="w-10 h-10 text-green-400 flex-shrink-0 mt-1"></i>
+          <div>
+            <h3 class="text-3xl font-bold text-white mb-4">Single Responsibility Principle (SRP) Aplicado</h3>
+            <div class="grid md:grid-cols-2 gap-6 text-slate-200">
+              <div>
+                <h4 class="font-bold text-xl mb-2 text-blue-300">¿Qué es SRP?</h4>
+                <p class="mb-2">Cada componente/módulo debe tener <strong>una sola razón para cambiar</strong>.</p>
+                <p class="text-sm text-slate-300">Si cambias la lógica de notificaciones, NO afectas la lógica de reservas.</p>
+              </div>
+              <div>
+                <h4 class="font-bold text-xl mb-2 text-green-300">En esta arquitectura:</h4>
+                <ul class="space-y-2 text-sm">
+                  <li>• <strong>Gestor de Reservas:</strong> Solo maneja el ciclo de vida de reservas</li>
+                  <li>• <strong>Gestor de Disponibilidad:</strong> Solo controla mesas/horarios</li>
+                  <li>• <strong>Gestor de Usuarios:</strong> Solo gestiona autenticación y perfiles</li>
+                  <li>• <strong>Gestor de Notificaciones:</strong> Solo envía mensajes</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Flow Example -->
+      <div class="bg-slate-800 rounded-xl p-8 shadow-2xl border border-slate-700 mt-8">
+        <h3 class="text-2xl font-bold text-white mb-6 text-center">📱 Flujo: Cliente hace una reserva</h3>
+        <div class="flex flex-col md:flex-row items-center justify-center gap-4">
+          <div class="flow-step bg-blue-600 rounded-lg p-4 text-white text-center min-w-[150px] shadow-lg">
+            <div class="text-2xl font-bold mb-2">1</div>
+            <div class="text-sm">Cliente selecciona fecha/hora</div>
+          </div>
+          <div class="text-slate-400 text-2xl">→</div>
+          <div class="flow-step bg-green-600 rounded-lg p-4 text-white text-center min-w-[150px] shadow-lg">
+            <div class="text-2xl font-bold mb-2">2</div>
+            <div class="text-sm">Gestor de Disponibilidad verifica mesas</div>
+          </div>
+          <div class="text-slate-400 text-2xl">→</div>
+          <div class="flow-step bg-green-600 rounded-lg p-4 text-white text-center min-w-[150px] shadow-lg">
+            <div class="text-2xl font-bold mb-2">3</div>
+            <div class="text-sm">Gestor de Reservas crea la reserva</div>
+          </div>
+          <div class="text-slate-400 text-2xl">→</div>
+          <div class="flow-step bg-purple-600 rounded-lg p-4 text-white text-center min-w-[150px] shadow-lg">
+            <div class="text-2xl font-bold mb-2">4</div>
+            <div class="text-sm">Se guarda en Base de Datos</div>
+          </div>
+          <div class="text-slate-400 text-2xl">→</div>
+          <div class="flow-step bg-orange-600 rounded-lg p-4 text-white text-center min-w-[150px] shadow-lg">
+            <div class="text-2xl font-bold mb-2">5</div>
+            <div class="text-sm">Gestor de Notificaciones envía email</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Benefits -->
+      <div class="grid md:grid-cols-3 gap-6 mt-8">
+        <div class="bg-slate-800 rounded-lg p-6 shadow-xl border border-slate-700 hover:border-slate-600 transition-all">
+          <div class="text-4xl mb-3 text-center">🔧</div>
+          <h4 class="text-xl font-bold text-white mb-2 text-center">Mantenibilidad</h4>
+          <p class="text-slate-300 text-sm text-center">Cambios aislados: modificar notificaciones no afecta reservas</p>
+        </div>
+        <div class="bg-slate-800 rounded-lg p-6 shadow-xl border border-slate-700 hover:border-slate-600 transition-all">
+          <div class="text-4xl mb-3 text-center">📈</div>
+          <h4 class="text-xl font-bold text-white mb-2 text-center">Escalabilidad</h4>
+          <p class="text-slate-300 text-sm text-center">Cada componente puede optimizarse independientemente</p>
+        </div>
+        <div class="bg-slate-800 rounded-lg p-6 shadow-xl border border-slate-700 hover:border-slate-600 transition-all">
+          <div class="text-4xl mb-3 text-center">✅</div>
+          <h4 class="text-xl font-bold text-white mb-2 text-center">Testabilidad</h4>
+          <p class="text-slate-300 text-sm text-center">Cada gestor se prueba de forma aislada</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  lucide.createIcons();
+
+  function toggleLayer(layer) {
+    const responsibilities = layer.querySelectorAll('.responsibilities');
+    responsibilities.forEach(r => r.classList.toggle('hidden'));
+  }
+</script>
+
+</body>
+</html>
